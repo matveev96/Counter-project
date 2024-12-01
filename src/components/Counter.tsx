@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {Controllers} from "./Controllers";
 import {Window} from "./Window";
 
-export const CounterNext = () => {
+export const Counter = () => {
 
     const [count, setCount] = useState<number>(0)
 
@@ -12,9 +12,11 @@ export const CounterNext = () => {
     const randomNum = Math.floor(Math.random() * (max - min) + min)
 
     const randomRef =useRef<number>(randomNum)
+    const currentRandomValue = randomRef.current;
+
 
     const counterAdd = () => {
-        if(count < randomRef.current) {
+        if(count < currentRandomValue) {
             setCount(count + 1)
         }
     }
@@ -27,11 +29,11 @@ export const CounterNext = () => {
     return (
         <CounterWrapper>
             <Window value={count}
-                    maxValue={randomRef.current}/>
+                    maxValue={currentRandomValue}/>
             <Controllers counterAdd={counterAdd}
                          counterReset={counterReset}
                          isDisabled={count}
-                         maxValue={randomRef.current}/>
+                         maxValue={currentRandomValue}/>
         </CounterWrapper>
     );
 };

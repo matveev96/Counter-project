@@ -1,15 +1,13 @@
 import React from 'react';
 import './App.css';
-import {Counter} from "./components/Counter_Vrsion1.0";
 import styled from "styled-components";
-import {CounterNext} from "./components/Counter_Version1.1";
+import {Counter} from "./components/Counter";
 
 function App() {
 
     return (
         <AppStyled>
             <Counter/>
-            <CounterNext/>
         </AppStyled>
     );
 }
