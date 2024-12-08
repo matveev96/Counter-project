@@ -4,16 +4,27 @@ import {Controllers} from "./Controllers";
 import {Window} from "./Window";
 
 export const Counter = () => {
-
-    const [count, setCount] = useState<number>(0)
-
     const min = Math.ceil(1);
     const max = Math.floor(10);
-    const randomNum = Math.floor(Math.random() * (max - min) + min)
+    let randomNum = Math.floor(Math.random() * (max - min) + min)
 
+    const [count, setCount] = useState<number>(0)
     const randomRef =useRef<number>(randomNum)
-    const currentRandomValue = randomRef.current;
 
+    useEffect(() => {
+        const valueToString = localStorage.getItem("counter");
+        if (valueToString) {
+            const valueToNum = JSON.parse(valueToString)
+            setCount(valueToNum)
+            randomNum = valueToNum
+        }
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem("counter", JSON.stringify(count));
+    }, [count]);
+
+    const currentRandomValue = randomRef.current;
 
     const counterAdd = () => {
         if(count < currentRandomValue) {
